@@ -269,6 +269,14 @@ test('verifyWebhook rejects a malformed header', () => {
     assert.throws(() => verifyWebhook('{}', undefined, SECRET), /Missing X-Goal-Signature/);
 });
 
+test('verifyWebhook rejects a short signature instead of crashing', () => {
+    // timingSafeEqual throws RangeError on a length mismatch, and the signature is
+    // attacker-controlled, so this used to take the process down instead of returning 400.
+    const body = JSON.stringify({ a: 1 });
+    assert.throws(() => verifyWebhook(body, 't=1,v1=deadbeef', SECRET), WebhookSignatureError);
+    assert.throws(() => verifyWebhook(body, `t=1,v1=${'ab'.repeat(64)}`, SECRET), WebhookSignatureError);
+});
+
 test('verifyWebhook rejects a wrong secret', () => {
     const body = JSON.stringify({ a: 1 });
     const ts = Math.floor(Date.now() / 1000);

@@ -40,8 +40,12 @@ export function verifyWebhook(payload, signatureHeader, secret, { tolerance = 30
         .update(`${timestamp}.${raw}`)
         .digest('hex');
 
-    // Same digest length either way, so timingSafeEqual won't throw on a mismatch.
-    const ok = crypto.timingSafeEqual(Buffer.from(expected, 'hex'), Buffer.from(signature, 'hex'));
+    // The signature is attacker-controlled and can be any length, and timingSafeEqual
+    // throws a RangeError on a length mismatch rather than returning false. Compare the
+    // lengths first so a short signature is a rejection, not a crash.
+    const provided = Buffer.from(signature, 'hex');
+    const digest = Buffer.from(expected, 'hex');
+    const ok = provided.length === digest.length && crypto.timingSafeEqual(digest, provided);
     if (!ok) throw new WebhookSignatureError('Webhook signature does not match');
 
     if (tolerance > 0) {
