@@ -1,0 +1,56 @@
+{
+  "name": "@goal-api/sdk",
+  "version": "1.0.0",
+  "description": "JavaScript and TypeScript SDK for the GOAL API: football fixtures, live scores, standings, stats and live WebSocket updates.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "types",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "example": "node examples/basic.js"
+  },
+  "keywords": [
+    "goal-api",
+    "football",
+    "soccer",
+    "live-scores",
+    "fixtures",
+    "standings",
+    "sports-data",
+    "api-client",
+    "sdk"
+  ],
+  "license": "MIT",
+  "homepage": "https://goal-api.com/documentation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Devara-sarl/goal-api-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Devara-sarl/goal-api-js/issues"
+  },
+  "peerDependencies": {
+    "ws": ">=8"
+  },
+  "peerDependenciesMeta": {
+    "ws": {
+      "optional": true
+    }
+  }
+}
