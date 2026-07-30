@@ -161,6 +161,19 @@ goal.rateLimit;   // { limit, remaining, reset, type: 'DAILY' | 'MONTHLY' }
 
 ## Live WebSocket updates
 
+> The socket is at `wss://api.goal-api.com/ws`, **not** `/v1/ws`. Only nginx's
+> `location ^~ /ws` carries the `Upgrade` headers; `/v1/ws` is proxied as ordinary HTTP and
+> answers 200 instead of upgrading. The SDK derives the right URL for you.
+>
+> Two services authenticate: the gateway authorises the upgrade from the header or
+> `?wsToken=`, then websocket-service needs an `{"type": "auth", ...}` frame as the very
+> first message. The SDK sends it, and treats `auth_success` as the point the connection is
+> usable.
+>
+> **`subscribe` is capped per plan and the cap can be 0.** `auth_success` reports
+> `maxSubscriptions`; if it is 0 the socket works but no `match_update` will ever arrive.
+> See the known server issue in [`ENDPOINTS.md`](ENDPOINTS.md).
+
 ```js
 const live = goal.live();
 
@@ -247,6 +260,21 @@ It flows through pagination too, so there are no casts anywhere:
 for await (const team of goal.paginate((p) => goal.teams.list<Team>(p))) {
     team.name;   // string
 }
+```
+
+## Examples
+
+| File | Shows |
+|---|---|
+| [`examples/basic.js`](examples/basic.js) | Status, live fixtures, standings, pagination |
+| [`examples/live-scores.js`](examples/live-scores.js) | The live socket: connect, subscribe, print every frame |
+| [`examples/webhook-server.js`](examples/webhook-server.js) | Verifying a webhook against the raw request bytes |
+| [`examples/bulk-export.js`](examples/bulk-export.js) | Walking every page of a collection to CSV |
+
+```bash
+GOAL_API_KEY=...          node examples/live-scores.js
+GOAL_WEBHOOK_SECRET=...   node examples/webhook-server.js
+GOAL_API_KEY=...          node examples/bulk-export.js > countries.csv
 ```
 
 ## Testing
