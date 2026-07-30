@@ -2,6 +2,15 @@
   "name": "@goal-api/sdk",
   "version": "1.0.0",
   "description": "JavaScript and TypeScript SDK for the GOAL API: football fixtures, live scores, standings, stats and live WebSocket updates.",
+  "license": "MIT",
+  "homepage": "https://goal-api.com/documentation",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devara-sarl/goal-api-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Devara-sarl/goal-api-js/issues"
+  },
   "type": "module",
   "main": "./src/index.js",
   "types": "./types/index.d.ts",
@@ -16,7 +25,9 @@
     "types",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "THIRD_PARTY_NOTICES.md",
+    "SECURITY.md"
   ],
   "engines": {
     "node": ">=18"
@@ -36,15 +47,6 @@
     "api-client",
     "sdk"
   ],
-  "license": "MIT",
-  "homepage": "https://goal-api.com/documentation",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Devara-sarl/goal-api-js.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Devara-sarl/goal-api-js/issues"
-  },
   "peerDependencies": {
     "ws": ">=8"
   },
@@ -52,5 +54,11 @@
     "ws": {
       "optional": true
     }
-  }
+  },
+  "author": "Devara SARL <support@goal-api.com>",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": false
 }
