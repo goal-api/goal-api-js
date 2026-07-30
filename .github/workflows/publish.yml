@@ -1,0 +1,45 @@
+name: publish
+
+# Tag v1.2.0 to publish 1.2.0. The version in package.json must match, or this fails
+# before reaching npm.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Build and pack without publishing
+        type: boolean
+        default: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write   # npm trusted publishing + provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or newer; the bundled npm is older.
+      - run: npm install -g npm@latest
+
+      - name: tag matches package.json
+        if: github.event_name == 'push'
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF#refs/tags/v}"
+          manifest=$(node -p "require('./package.json').version")
+          if [ "$tag" != "$manifest" ]; then
+            echo "::error::tag v$tag but package.json says $manifest"
+            exit 1
+          fi
+
+      - run: npm test
+      - run: npm pack --dry-run
+      - if: inputs.dry_run != true
+        run: npm publish --access public --provenance

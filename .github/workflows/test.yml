@@ -1,0 +1,37 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['18', '20', '22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save typescript@5 @types/node
+      # Checks the declarations compile, and that a realistic consumer typechecks
+      # against them under --strict.
+      - run: |
+          npx tsc --noEmit --strict --skipLibCheck \
+            --target es2022 --lib es2022,dom \
+            --moduleResolution bundler --module esnext \
+            types/index.d.ts

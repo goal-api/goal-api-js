@@ -1,0 +1,21 @@
+name: live-api
+
+# Hits the real API. Kept separate from `test` so a fork PR can never reach the key.
+# Needs a GOAL_API_KEY secret on the `live-api` environment; the tests skip without it.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    environment: live-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - env:
+          GOAL_API_KEY: ${{ secrets.GOAL_API_KEY }}
+        run: npm test
