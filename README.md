@@ -259,6 +259,12 @@ GOAL_API_KEY=... npm test      # also runs the live tests against the real API
 The live tests skip themselves without a key, so the same command works either way.
 Endpoint-by-endpoint coverage of the API lives in `tools/sweep.py` in the SDK workspace.
 
-## License
+## Licence
 
-MIT
+MIT. See [LICENSE](LICENSE).
+
+No runtime dependencies: this package uses the platform's own `fetch`, `WebSocket` and
+`node:crypto`. The one optional peer dependency (`ws`, MIT, needed only on Node 18-21) and
+the dev-only tooling are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+Security issues: [SECURITY.md](SECURITY.md).
