@@ -6,10 +6,10 @@
   "homepage": "https://goal-api.com/documentation",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Devara-sarl/goal-api-js.git"
+    "url": "git+https://github.com/goal-api/goal-api-js.git"
   },
   "bugs": {
-    "url": "https://github.com/Devara-sarl/goal-api-js/issues"
+    "url": "https://github.com/goal-api/goal-api-js/issues"
   },
   "type": "module",
   "main": "./src/index.js",

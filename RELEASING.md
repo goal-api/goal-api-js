@@ -25,7 +25,7 @@ validates and packs, then stops before uploading.
 1. Publish `1.0.0` once by hand (`npm publish --access public`); npm cannot configure
    trusted publishing for a package that does not exist.
 2. On npmjs.com go to the package, then Settings, then Trusted publishers, and add:
-   - Repository: `Devara-sarl/goal-api-js`
+   - Repository: `goal-api/goal-api-js`
    - Workflow: `.github/workflows/publish.yml`
    - Environment: `npm`
 
