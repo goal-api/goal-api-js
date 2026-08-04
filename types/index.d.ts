@@ -1,5 +1,5 @@
 /**
- * Type declarations for @goal-api/sdk.
+ * Type declarations for @goalapi/sdk.
  *
  * Params, methods, enums and errors are fully typed. Row shapes are not, since they are
  * provider-shaped and change, so each endpoint method takes its row type as a type

@@ -1,7 +1,7 @@
 # Third-party notices
 
 This package is MIT licensed and has **no runtime dependencies**. It uses the platform's
-own `fetch`, `WebSocket` and `node:crypto`, so `npm install @goal-api/sdk` adds exactly one
+own `fetch`, `WebSocket` and `node:crypto`, so `npm install @goalapi/sdk` adds exactly one
 package to your tree.
 
 ## Optional peer dependency

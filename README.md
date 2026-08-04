@@ -1,4 +1,4 @@
-# @goal-api/sdk
+# @goalapi/sdk
 
 JavaScript and TypeScript SDK for the [GOAL API](https://goal-api.com): football
 fixtures, live scores, standings, player stats, odds and live WebSocket updates.
@@ -6,13 +6,13 @@ fixtures, live scores, standings, player stats, odds and live WebSocket updates.
 Zero runtime dependencies. Works in Node 18+, Deno, Bun, Cloudflare Workers and browsers.
 
 ```bash
-npm install @goal-api/sdk
+npm install @goalapi/sdk
 ```
 
 ## Quick start
 
 ```js
-import { GoalApi } from '@goal-api/sdk';
+import { GoalApi } from '@goalapi/sdk';
 
 const goal = new GoalApi({ apiKey: process.env.GOAL_API_KEY });
 
@@ -116,7 +116,7 @@ Everything thrown is a `GoalApiError`. Branch only where you'd actually behave
 differently:
 
 ```js
-import { RateLimitError, ValidationError, NotFoundError, PlanUpgradeRequiredError } from '@goal-api/sdk';
+import { RateLimitError, ValidationError, NotFoundError, PlanUpgradeRequiredError } from '@goalapi/sdk';
 
 try {
     await goal.fixtures.get(id);
@@ -203,7 +203,7 @@ will never match.
 
 ```js
 import express from 'express';
-import { verifyWebhook, WebhookSignatureError } from '@goal-api/sdk';
+import { verifyWebhook, WebhookSignatureError } from '@goalapi/sdk';
 
 const app = express();
 
@@ -243,7 +243,7 @@ Row shapes are not, since they are provider-shaped and change. Each endpoint met
 its row type as a **type argument** instead:
 
 ```ts
-import { GoalApi, type MatchStatus } from '@goal-api/sdk';
+import { GoalApi, type MatchStatus } from '@goalapi/sdk';
 
 interface Fixture { id: string; status: MatchStatus; homeScore: number | null }
 

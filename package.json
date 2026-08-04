@@ -1,5 +1,5 @@
 {
-  "name": "@goal-api/sdk",
+  "name": "@goalapi/sdk",
   "version": "1.0.0",
   "description": "JavaScript and TypeScript SDK for the GOAL API: football fixtures, live scores, standings, stats and live WebSocket updates.",
   "license": "MIT",

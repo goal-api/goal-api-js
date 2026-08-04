@@ -22,8 +22,14 @@ validates and packs, then stops before uploading.
 
 ### npm trusted publishing
 
-1. Publish `1.0.0` once by hand (`npm publish --access public`); npm cannot configure
-   trusted publishing for a package that does not exist.
+1. Publish `1.0.0` once by hand; npm cannot configure trusted publishing for a package
+   that does not exist. Provenance has to be off for this one, because signing it needs
+   an OIDC token that only CI has:
+
+   ```bash
+   npm publish --access public --provenance=false
+   ```
+
 2. On npmjs.com go to the package, then Settings, then Trusted publishers, and add:
    - Repository: `goal-api/goal-api-js`
    - Workflow: `.github/workflows/publish.yml`
@@ -33,8 +39,9 @@ After that there is no `NPM_TOKEN` to store or rotate.
 
 ## Package name
 
-> The registry name in this repo is a placeholder pending confirmation. Check you own the
-> namespace before the first publish; renaming after release is disruptive.
+`@goalapi/sdk`, under the `goalapi` npm org. The scope is not `goal-api` — that one is
+unclaimed and unrelated. The `User-Agent` the client sends is still `goal-api-js/<version>`,
+which tracks the repo name rather than the registry name; leave it alone.
 
 ## Secrets
 
