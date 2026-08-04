@@ -55,7 +55,7 @@
       "optional": true
     }
   },
-  "author": "Devara SARL <support@goal-api.com>",
+  "author": "GOAL API <support@goal-api.com>",
   "publishConfig": {
     "access": "public",
     "provenance": true
