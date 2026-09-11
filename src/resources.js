@@ -134,6 +134,14 @@ export class Videos extends Resource {
     byDate(date, params, opts) { return this._get(`/videos/date/${enc(date)}`, params, opts); }
 }
 
+export class News extends Resource {
+    list(params, opts) { return this._get('/news', params, opts); }
+    byMatch(matchId, params, opts) { return this._get(`/news/match/${enc(matchId)}`, params, opts); }
+    byTeam(teamId, params, opts) { return this._get(`/news/team/${enc(teamId)}`, params, opts); }
+    byLeague(leagueId, params, opts) { return this._get(`/news/league/${enc(leagueId)}`, params, opts); }
+    get(id, opts) { return this._get(`/news/${enc(id)}`, null, opts); }
+}
+
 export class Odds extends Resource {
     list(params, opts) { return this._get('/odds', params, opts); }
 }

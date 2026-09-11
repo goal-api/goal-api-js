@@ -282,3 +282,17 @@ test('verifyWebhook rejects a wrong secret', () => {
     const ts = Math.floor(Date.now() / 1000);
     assert.throws(() => verifyWebhook(body, sign(body, ts), 'whsec_other'), /does not match/);
 });
+
+test('news.list hits /news and forwards its filters', async () => {
+    // The surface the ENDPOINTS.md spec promises: leagueId/teamId/matchId are the news
+    // source's ids, not ours, so they travel through untouched.
+    const f = fakeFetch({ body: { success: true, data: [], pagination: { total: 0 } } });
+    await client(f).news.list({ leagueId: '3', teamId: '150', from: '2026-09-01', limit: 5 });
+
+    const url = new URL(f.calls[0].url);
+    assert.equal(url.pathname, '/v1/news');
+    assert.equal(url.searchParams.get('leagueId'), '3');
+    assert.equal(url.searchParams.get('teamId'), '150');
+    assert.equal(url.searchParams.get('from'), '2026-09-01');
+    assert.equal(url.searchParams.get('limit'), '5');
+});

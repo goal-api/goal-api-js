@@ -42,6 +42,7 @@ export class GoalApi {
         this.h2h = new R.HeadToHead(this._transport);
         this.results = new R.Results(this._transport);
         this.videos = new R.Videos(this._transport);
+        this.news = new R.News(this._transport);
         this.odds = new R.Odds(this._transport);
         this.predictions = new R.Predictions(this._transport);
     }

@@ -279,6 +279,18 @@ export declare class Videos {
     byDate<T = Row>(date: DateString, p?: PageParams & { leagueId?: string }, o?: RequestOptions): Promise<ListResponse<T>>;
 }
 
+export declare class News {
+    list<T = Row>(
+        p?: PageParams & DateRangeParams & { leagueId?: string; teamId?: string; matchId?: string },
+        o?: RequestOptions
+    ): Promise<ListResponse<T>>;
+    byMatch<T = Row>(matchId: string | number, p?: PageParams & DateRangeParams, o?: RequestOptions): Promise<ListResponse<T>>;
+    byTeam<T = Row>(teamId: string | number, p?: PageParams & DateRangeParams, o?: RequestOptions): Promise<ListResponse<T>>;
+    byLeague<T = Row>(leagueId: string | number, p?: PageParams & DateRangeParams, o?: RequestOptions): Promise<ListResponse<T>>;
+    /** Accepts our id or the provider's news key. 404s when there is no such article. */
+    get<T = Row>(id: string | number, o?: RequestOptions): Promise<ItemResponse<T>>;
+}
+
 export declare class Odds {
     list<T = Row>(p?: PageParams & { bookmaker?: string; matchId?: string }, o?: RequestOptions): Promise<ListResponse<T>>;
 }
@@ -366,6 +378,7 @@ export declare class GoalApi {
     readonly h2h: HeadToHead;
     readonly results: Results;
     readonly videos: Videos;
+    readonly news: News;
     readonly odds: Odds;
     readonly predictions: Predictions;
 
