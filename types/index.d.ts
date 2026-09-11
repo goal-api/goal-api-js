@@ -2,7 +2,7 @@
  * Type declarations for @goalapi/sdk.
  *
  * Params, methods, enums and errors are fully typed. Row shapes are not, since they are
- * provider-shaped and change, so each endpoint method takes its row type as a type
+ * shaped by the API's responses and change, so each endpoint method takes its row type as a type
  * argument and falls back to a plain record:
  *
  *     const page = await goal.fixtures.live<Fixture>();   // page.data is Fixture[]
@@ -287,7 +287,7 @@ export declare class News {
     byMatch<T = Row>(matchId: string | number, p?: PageParams & DateRangeParams, o?: RequestOptions): Promise<ListResponse<T>>;
     byTeam<T = Row>(teamId: string | number, p?: PageParams & DateRangeParams, o?: RequestOptions): Promise<ListResponse<T>>;
     byLeague<T = Row>(leagueId: string | number, p?: PageParams & DateRangeParams, o?: RequestOptions): Promise<ListResponse<T>>;
-    /** Accepts our id or the provider's news key. 404s when there is no such article. */
+    /** Accepts our id or the article's apiId. 404s when there is no such article. */
     get<T = Row>(id: string | number, o?: RequestOptions): Promise<ItemResponse<T>>;
 }
 

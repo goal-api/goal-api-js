@@ -239,7 +239,7 @@ const data = await goal.request('/some/new/endpoint', { limit: 10 });
 
 Types ship with the package. Params, methods, enums and errors are fully typed.
 
-Row shapes are not, since they are provider-shaped and change. Each endpoint method takes
+Row shapes are not, since they follow the API's response shapes and change. Each endpoint method takes
 its row type as a **type argument** instead:
 
 ```ts
